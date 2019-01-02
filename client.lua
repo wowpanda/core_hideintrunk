@@ -1,19 +1,3 @@
-ESX					= nil
-
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-
-	ESX.PlayerData = ESX.GetPlayerData()
-
-end)
-
 		local player = PlayerPedId()
 		local inside = false
 
@@ -26,20 +10,21 @@ end)
 			local plyCoords = GetEntityCoords(player, false)
 			local vehicle = VehicleInFront()
 	    
-		    if IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
+		    if IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) then
 			 	SetVehicleDoorOpen(vehicle, 5, false, false)    	
 		    	if not inside then
-		    		
-		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.2, 0.5, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
-		       		
+		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.2, 0.5, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
 		       		if IsEntityAttached(player) then
-		       			ESX.ShowHelpNotification('~INPUT_JUMP~~r~ invisibility ~n~~s~~INPUT_CHARACTER_WHEEL~+~INPUT_COVER~ ~r~get out')
+						SetTextComponentFormat("STRING")
+						AddTextComponentString('~INPUT_JUMP~~r~ invisibility ~n~~s~~INPUT_CHARACTER_WHEEL~+~INPUT_COVER~ ~r~get out')
+						DisplayHelpTextFromStringLabel(0, 0, 0, -1)		       			
 						TaskPlayAnim(player, 'timetable@floyd@cryingonbed@base', 'base', 1.0, -1, -1, 1, 0, 0, 0, 0)	
 		            	if not (IsEntityPlayingAnim(player, 'timetable@floyd@cryingonbed@base', 'base', 3) == 1) then
-		          			ESX.Streaming.RequestAnimDict('timetable@floyd@cryingonbed@base', function()
+		          			Streaming('timetable@floyd@cryingonbed@base', function()
 					  		TaskPlayAnim(playerPed, 'timetable@floyd@cryingonbed@base', 'base', 1.0, -1, -1, 49, 0, 0, 0, 0)
 		               	end)
-		            end 
+		            end    
+		           	
 		    		inside = true 						         		
 		    		else
 		    		inside = false
@@ -47,7 +32,7 @@ end)
 		    	elseif inside and IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
 		    		DetachEntity(player, true, true)
 		    		SetEntityVisible(player, true, true)
-		   			ClearPedTasks(player)	  
+		   			ClearPedTasks(player)  	  
 		    		inside = false
 
 
@@ -64,14 +49,25 @@ end)
 		    					SetEntityVisible(player, false, false)
 		    					visible = false			
 		    				end   	
-		    			end
-					-- WIP - client side only right now.
-					--DrawText3D2(plyCoords.x, plyCoords.y, plyCoords.z + 1.0, '~r~Weird noises~s~ in trunk', 0.5)  
-					
+		    			end 					
+			
 				end  	
 	  	end
 	end)
 
+function Streaming(animDict, cb)
+	if not HasAnimDictLoaded(animDict) then
+		RequestAnimDict(animDict)
+
+		while not HasAnimDictLoaded(animDict) do
+			Citizen.Wait(1)
+		end
+	end
+
+	if cb ~= nil then
+		cb()
+	end
+end	
 function VehicleInFront()
     local pos = GetEntityCoords(player)
     local entityWorld = GetOffsetFromEntityInWorldCoords(player, 0.0, 2.0, 0.0)
