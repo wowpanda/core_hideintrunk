@@ -1,7 +1,7 @@
 # esx_hideintrunk
 
-- ALT + Q for ENTER/LEAVE trunk
-- SPACE for INVISIBILITY
+- **ALT + Q** for ENTER/LEAVE trunk
+- **SPACE** for INVISIBILITY
 - EDIT HelpMessage and possibly loading of AnimDict for standalone.
 
 ### BUGS ####
