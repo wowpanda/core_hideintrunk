@@ -1,4 +1,7 @@
-# esx_hideintrunk
+# fivem_hideintrunk
+
+### REQUIREMENTS ####
+- NONE, ITS STANDALONE
 
 - **ALT + Q** for ENTER/LEAVE trunk
 - **SPACE** for INVISIBILITY
