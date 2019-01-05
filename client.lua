@@ -50,6 +50,11 @@
 		   			DisableAllControlActions(0)
 		   			DisableAllControlActions(1)
 		   			DisableAllControlActions(2)
+					EnableControlAction(0, 289, true) --- F2	
+					EnableControlAction(0, 27, true) --- Up			
+					EnableControlAction(0, 173, true) --- Down		
+					EnableControlAction(0, 18, true) --- Enter	
+					EnableControlAction(0, 289, true) --- V				
 		   			EnableControlAction(2, 1, true) --- camera moving
 		   			EnableControlAction(2, 2, true) --- camera moving	
 		   			EnableControlAction(0, 177, true) --- BACKSPACE
