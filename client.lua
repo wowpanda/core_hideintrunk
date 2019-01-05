@@ -9,11 +9,11 @@
 			local plyCoords = GetEntityCoords(player, false)
 			local vehicle = VehicleInFront()
   		
-		    if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 and DoesEntityExist(vehicle) then
+		    if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 and DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
 			 	SetVehicleDoorOpen(vehicle, 5, false, false)    	
 		    	if not inside then
 		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.2, 0.5, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
-		       		if IsEntityAttached(player) then
+		       		if IsEntityAttached(player) and IsEntityAVehicle(vehicle) and not inside then
 						SetTextComponentFormat("STRING")
 						AddTextComponentString('~INPUT_JUMP~ invisibility ~n~~s~~INPUT_CHARACTER_WHEEL~+~INPUT_COVER~ get out')
 						DisplayHelpTextFromStringLabel(0, 1, 1, -1)		       			
@@ -33,7 +33,7 @@
 		    		SetEntityVisible(player, true, true)
 		   			ClearPedTasks(player)  	  
 		    		inside = false
-
+				ClearAllHelpMessages()		    		
 
 		    	end
 		    	Citizen.Wait(2000)
@@ -69,7 +69,8 @@
 		    		DetachEntity(player, true, true)
 		    		SetEntityVisible(player, true, true)
 		   			ClearPedTasks(player)  	  
-		    		inside = false			
+		    		inside = false	
+				ClearAllHelpMessages()	
 			end  	
 	  	end
 	end)
