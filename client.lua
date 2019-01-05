@@ -10,7 +10,7 @@
 			local plyCoords = GetEntityCoords(player, false)
 			local vehicle = VehicleInFront()
 	    
-		    if IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
+		    if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
 			 	SetVehicleDoorOpen(vehicle, 5, false, false)    	
 		    	if not inside then
 		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.2, 0.5, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
@@ -29,7 +29,7 @@
 		    		else
 		    		inside = false
 		    		end   			
-		    	elseif inside and IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
+		    	elseif inside and IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 44) then
 		    		DetachEntity(player, true, true)
 		    		SetEntityVisible(player, true, true)
 		   			ClearPedTasks(player)  	  
@@ -44,7 +44,14 @@
 		    		car = GetEntityAttachedTo(player)
 		    		carxyz = GetEntityCoords(car, 0)
 		   			local visible = true
-		     			if IsDisabledControlPressed(1, 22) then
+		   			DisableAllControlActions(0)
+		   			DisableAllControlActions(1)
+		   			DisableAllControlActions(2)
+		   			EnableControlAction(2, 1, true) --- camera moving
+		   			EnableControlAction(2, 2, true) --- camera moving	
+		   			EnableControlAction(0, 177, true) --- BACKSPACE
+		   			EnableControlAction(0, 200, true) --- ESC					
+		     			if IsDisabledControlJustPressed(1, 22) then
 		     				if visible then
 		    					SetEntityVisible(player, false, false)
 		    					visible = false			
