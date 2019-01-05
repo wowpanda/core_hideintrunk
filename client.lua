@@ -10,7 +10,7 @@
 			local plyCoords = GetEntityCoords(player, false)
 			local vehicle = VehicleInFront()
 	    
-		    if IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) then
+		    if IsDisabledControlPressed(0, 19) and IsControlJustReleased(1, 44) and GetVehiclePedIsIn(player, false) == 0 then
 			 	SetVehicleDoorOpen(vehicle, 5, false, false)    	
 		    	if not inside then
 		        	AttachEntityToEntity(player, vehicle, -1, 0.0, -2.2, 0.5, 0.0, 0.0, 0.0, false, false, false, false, 20, true)		       		
