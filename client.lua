@@ -17,7 +17,13 @@ if IsDisabledControlPressed(0, 19) and IsDisabledControlJustReleased(1, 44) and 
 		outoftrunk()
 	end
 end
-
+			
+RegisterCommand('hideintrunk', function()
+if not inside then
+	hideintrunk()
+end	
+end, false)
+			
 RegisterNetEvent('core:hideintrunk')
 AddEventHandler('core:hideintrunk', function()
 	hideintrunk()
