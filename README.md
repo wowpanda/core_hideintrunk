@@ -14,8 +14,8 @@ end)
 ```
 and this example for your client side menu
 ```lua
-{label = 'Narvat do kufru', value = 'hideintrunk'},            
-{label = 'Vytahnout z kufru', value = 'outoftrunk'}, 
+{label = 'Force in trunk', value = 'hideintrunk'},            
+{label = 'Fource out of trunk', value = 'outoftrunk'}, 
 
 if data.current.value == 'hideintrunk' then
     TriggerServerEvent('core:hideintrunk', GetPlayerServerId(player))
