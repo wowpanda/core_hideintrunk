@@ -1,29 +1,4 @@
 # fivem_hideintrunk
-### HOW TO FORCE PEOPLE IN ###
-
-Add this to your server side file of jobs
-```lua
-RegisterServerEvent('core:hideintrunk')
-AddEventHandler('core:hideintrunk', function(target)
-    TriggerClientEvent('core:hideintrunk', target)
-end)
-RegisterServerEvent('core:outoftrunk')
-AddEventHandler('core:outoftrunk', function(target)
-    TriggerClientEvent('core:outoftrunk', target)
-end)
-```
-and this example for your client side menu
-```lua
-{label = 'Force in trunk', value = 'hideintrunk'},            
-{label = 'Fource out of trunk', value = 'outoftrunk'}, 
-
-if data.current.value == 'hideintrunk' then
-    TriggerServerEvent('core:hideintrunk', GetPlayerServerId(player))
-end
-if data.current.value == 'outoftrunk' then
-    TriggerServerEvent('core:outoftrunk', GetPlayerServerId(player))
-end           
-```
 
 ### REQUIREMENTS ####
 - NONE, ITS STANDALONE
